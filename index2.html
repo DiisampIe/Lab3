@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Моё резюме</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      transition: background-color 0.5s ease;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #4dd0e1;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #00796b;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #00897b;
+      margin-top: 0;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .box {
+      background-color: white;
+      padding: 25px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #00796b;
+    }
+
+    input {
+      width: 95%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 2px solid #b2dfdb;
+      background-color: #fafafa;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background-color: #26c6da;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00acc1;
+    }
+
+    .output {
+      margin-top: 20px;
+      background-color: #e0f7fa;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="https://i.pinimg.com/736x/4b/8d/2a/4b8d2a4cfd53f33967a6b194bc879031.jpg" alt="Фото профиля" class="profile-img">
+    <h1 id="fullname">Антон</h1>
+    <h2 id="jobtitle">Frontend разработчик</h2>
+  </div>
+
+  <div class="box">
+    <label for="newLastName">Изменить фамилию:</label>
+    <input type="text" id="newLastName" placeholder="Введите новую фамилию">
+    
+    <button onclick="changeLastName()">Обновить фамилию</button>
+    <div id="nameChangeResult" class="output"></div>
+  </div>
+
+  <div class="box">
+    <label for="newJobTitle">Изменить должность:</label>
+    <input type="text" id="newJobTitle" placeholder="Введите желаемую должность">
+    
+    <button onclick="changeJobTitle()">Обновить должность</button>
+    <div id="jobTitleChangeResult" class="output"></div>
+  </div>
+
+  <div class="box">
+    <button onclick="changeBackground()">Сменить цвет фона</button>
+  </div>
+
+  <script>
+    function changeLastName() {
+      const newLastName = document.getElementById("newLastName").value.trim();
+      const result = document.getElementById("nameChangeResult");
+      const fullnameElement = document.getElementById("fullname");
+      
+      if (newLastName === "") {
+        result.textContent = "⚠️ Пожалуйста, введите новую фамилию.";
+        return;
+      }
+      
+      const currentName = fullnameElement.textContent.split(" ")[0];
+      fullnameElement.textContent = currentName + " " + newLastName;
+      result.textContent = "Фамилия успешно изменена!";
+      document.getElementById("newLastName").value = "";
+    }
+
+    function changeJobTitle() {
+      const newJobTitle = document.getElementById("newJobTitle").value.trim();
+      const result = document.getElementById("jobTitleChangeResult");
+      const jobTitleElement = document.getElementById("jobtitle");
+      
+      if (newJobTitle === "") {
+        result.textContent = "⚠️ Пожалуйста, введите новую должность.";
+        return;
+      }
+      
+      jobTitleElement.textContent = newJobTitle;
+      result.textContent = "Должность успешно изменена!";
+      document.getElementById("newJobTitle").value = "";
+    }
+
+    function changeBackground() {
+      const colors = [
+        "#e0f7fa", "#e8f5e9", "#fff3e0", "#fce4ec", 
+        "#f3e5f5", "#e1f5fe", "#e0f2f1", "#f1f8e9"
+      ];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      document.body.style.backgroundColor = randomColor;
+    }
+  </script>
+
+</body>
+</html>
